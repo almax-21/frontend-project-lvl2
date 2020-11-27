@@ -1,0 +1,26 @@
+{
+  "name": "@hexlet/code",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "[![Actions Status](https://github.com/almax-21/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/almax-21/frontend-project-lvl2/actions)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/almax-21/frontend-project-lvl2.git"
+  },
+  "author": "Maksim Almaev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/almax-21/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/almax-21/frontend-project-lvl2#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}
