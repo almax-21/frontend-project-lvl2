@@ -4,6 +4,9 @@
   "type": "module",
   "description": "[![Actions Status](https://github.com/almax-21/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/almax-21/frontend-project-lvl2/actions)",
   "main": "index.js",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,7 +20,9 @@
     "url": "https://github.com/almax-21/frontend-project-lvl2/issues"
   },
   "homepage": "https://github.com/almax-21/frontend-project-lvl2#readme",
-  "dependencies": {},
+  "dependencies": {
+    "commander": "^6.2.0"
+  },
   "devDependencies": {
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
