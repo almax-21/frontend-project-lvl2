@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import getData from './utils.js';
+import buildData from './buildData.js';
 
 const genDiff = (filepath1, filepath2) => {
-  const data1 = getData(filepath1);
-  const data2 = getData(filepath2);
+  const data1 = buildData(filepath1);
+  const data2 = buildData(filepath2);
 
   const keys = _.union(_.keys(data1), _.keys(data2));
   const sortedKeys = keys.sort();

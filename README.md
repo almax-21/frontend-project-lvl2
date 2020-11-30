@@ -4,5 +4,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/dec3679a488b13a5f93c/maintainability)](https://codeclimate.com/github/almax-21/frontend-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/dec3679a488b13a5f93c/test_coverage)](https://codeclimate.com/github/almax-21/frontend-project-lvl2/test_coverage)
 
-### Run gendiff
+### JSON format
 [![asciicast](https://asciinema.org/a/RcaPtrMN0UkKfnVBhS2TyWrcj.svg)](https://asciinema.org/a/RcaPtrMN0UkKfnVBhS2TyWrcj)
+
+### YAML/YML format (+ with JSON)
+[![asciicast](https://asciinema.org/a/5QmMijRjMS0trEqLnqUx463od.svg)](https://asciinema.org/a/5QmMijRjMS0trEqLnqUx463od)

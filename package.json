@@ -1,6 +1,6 @@
 {
   "name": "@hexlet/code",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "description": "[![Actions Status](https://github.com/almax-21/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/almax-21/frontend-project-lvl2/actions)",
   "main": "./src/index.js",
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/almax-21/frontend-project-lvl2#readme",
   "dependencies": {
     "commander": "^6.2.0",
+    "js-yaml": "^3.14.0",
     "lodash": "^4.17.20"
   },
   "devDependencies": {
