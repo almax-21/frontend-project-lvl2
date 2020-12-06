@@ -12,3 +12,6 @@
 
 ### Stylish formatter
 [![asciicast](https://asciinema.org/a/curveTNlAazevfUDe98E9MsNI.svg)](https://asciinema.org/a/curveTNlAazevfUDe98E9MsNI)
+
+### Plain formatter
+[![asciicast](https://asciinema.org/a/LO8XwUJouj2FDefVJkjXS3vXV.svg)](https://asciinema.org/a/LO8XwUJouj2FDefVJkjXS3vXV)

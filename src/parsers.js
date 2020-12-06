@@ -9,5 +9,5 @@ export default (format) => {
     return yaml.safeLoad;
   }
 
-  throw new Error('Unexpected file format');
+  throw new Error(`Unexpected ${format} file format`);
 };

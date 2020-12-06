@@ -24,7 +24,7 @@ const formatValue = (obj, depth) => {
   return result;
 };
 
-const formatTree = (tree) => tree.reduce((acc, node, index) => {
+const stylish = (tree) => tree.reduce((acc, node, index) => {
   const { name, status, depth } = node;
   const value = _.isObject(node.value) ? '{' : node.value;
   const indent = makeIndent(depth * 2);
@@ -50,7 +50,7 @@ const formatTree = (tree) => tree.reduce((acc, node, index) => {
 
   if (status === 'changed') {
     const changed = `${indent}${name}: {`;
-    const children = formatTree(node.children);
+    const children = stylish(node.children);
     acc.push(changed, children);
   }
 
@@ -80,4 +80,4 @@ const formatTree = (tree) => tree.reduce((acc, node, index) => {
   return acc;
 }, []).join('\n');
 
-export default formatTree;
+export default stylish;
