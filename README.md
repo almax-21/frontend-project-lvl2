@@ -9,3 +9,6 @@
 
 ### YAML/YML format (+ with JSON)
 [![asciicast](https://asciinema.org/a/5QmMijRjMS0trEqLnqUx463od.svg)](https://asciinema.org/a/5QmMijRjMS0trEqLnqUx463od)
+
+### Stylish formatter
+[![asciicast](https://asciinema.org/a/curveTNlAazevfUDe98E9MsNI.svg)](https://asciinema.org/a/curveTNlAazevfUDe98E9MsNI)
