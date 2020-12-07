@@ -58,12 +58,12 @@ const stylish = (tree) => tree.reduce((acc, node, index) => {
     const deleted = `${indent.slice(0, -2)}- ${name}: `;
     const added = `${indent.slice(0, -2)}+ ${name}: `;
 
-    if (_.isObject(node.oldValue)) {
-      const innerValue = formatValue(node.oldValue, depth);
+    if (_.isObject(node.replacedValue)) {
+      const innerValue = formatValue(node.replacedValue, depth);
       acc.push(`${deleted}{`);
       acc.push(innerValue);
     } else {
-      acc.push(`${deleted}${node.oldValue}`);
+      acc.push(`${deleted}${node.replacedValue}`);
     }
     acc.push(`${added}${value}`);
   }

@@ -30,7 +30,7 @@ const buildTree = (data1, data2) => {
           ...basicProperties,
           status: 'updated',
           value: obj2[key],
-          oldValue: obj1[key],
+          replacedValue: obj1[key],
         };
       }
 

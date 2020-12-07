@@ -26,11 +26,11 @@ const plain = (tree) => {
         case 'deleted':
           return `Property '${pathName}' was removed`;
         case 'updated':
-          return `Property '${pathName}' was updated. From ${formatValue(node.oldValue)} to ${formatValue(value)}`;
+          return `Property '${pathName}' was updated. From ${formatValue(node.replacedValue)} to ${formatValue(value)}`;
         case 'changed':
           return iter(node.children, `${pathName}.`);
         default:
-          throw new Error();
+          throw new Error(`Unexpected ${status} node status`);
       }
     }).join('\n');
   };
