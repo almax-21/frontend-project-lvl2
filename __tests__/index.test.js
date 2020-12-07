@@ -10,28 +10,28 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 test('stylish formatter test', () => {
-  const before = getFixturePath('before.yaml');
-  const after = getFixturePath('after.json');
-  const actual = genDiff(before, after);
-  const expected = readFile('expected.stylish.txt');
+  const file1 = getFixturePath('file1.yaml');
+  const file2 = getFixturePath('file2.json');
+  const actual = genDiff(file1, file2);
+  const expected = readFile('expected_stylish.txt');
 
   expect(actual).toBe(expected);
 });
 
 test('plain formatter test', () => {
-  const before = getFixturePath('before.json');
-  const after = getFixturePath('after.json');
-  const actual = genDiff(before, after, 'plain');
-  const expected = readFile('expected.plain.txt');
+  const file1 = getFixturePath('file1.json');
+  const file2 = getFixturePath('file2.json');
+  const actual = genDiff(file1, file2, 'plain');
+  const expected = readFile('expected_plain.txt');
 
   expect(actual).toBe(expected);
 });
 
 test('json formatter test', () => {
-  const before = getFixturePath('before.yaml');
-  const after = getFixturePath('after.yml');
-  const actual = genDiff(before, after, 'json');
-  const expected = readFile('expected.json.txt');
+  const file1 = getFixturePath('file1.yaml');
+  const file2 = getFixturePath('file2.yml');
+  const actual = genDiff(file1, file2, 'json');
+  const expected = readFile('expected_json.txt');
 
   expect(actual).toBe(expected);
 });
