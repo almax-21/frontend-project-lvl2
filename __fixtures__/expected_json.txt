@@ -28,7 +28,7 @@
     "depth": 2,
     "status": "updated",
     "value": null,
-    "oldValue": true
+    "replacedValue": true
    },
    {
     "name": "setting4",
@@ -61,7 +61,7 @@
         "depth": 4,
         "status": "updated",
         "value": "so much",
-        "oldValue": ""
+        "replacedValue": ""
        }
       ]
      },
@@ -92,7 +92,7 @@
     "depth": 2,
     "status": "updated",
     "value": "bars",
-    "oldValue": "bas"
+    "replacedValue": "bas"
    },
    {
     "name": "foo",
@@ -105,7 +105,7 @@
     "depth": 2,
     "status": "updated",
     "value": "str",
-    "oldValue": {
+    "replacedValue": {
      "key": "value"
     }
    }
