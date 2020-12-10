@@ -24,8 +24,8 @@ const formatValue = (obj, depth) => {
   return result;
 };
 
-const stylish = (tree) => tree.reduce((acc, node, index) => {
-  const { name, status, depth } = node;
+const stylish = (tree, depth = 1) => tree.reduce((acc, node, index) => {
+  const { name, type } = node;
   const value = _.isObject(node.value) ? '{' : node.value;
   const indent = makeIndent(depth * 2);
 
@@ -33,28 +33,28 @@ const stylish = (tree) => tree.reduce((acc, node, index) => {
     acc.push('{');
   }
 
-  if (status === 'added') {
+  if (type === 'added') {
     const added = `${indent.slice(0, -2)}+ ${name}: `;
     acc.push(`${added}${value}`);
   }
 
-  if (status === 'deleted') {
+  if (type === 'deleted') {
     const deleted = `${indent.slice(0, -2)}- ${name}: `;
     acc.push(`${deleted}${value}`);
   }
 
-  if (status === 'unchanged') {
+  if (type === 'unchanged') {
     const unchanged = `${indent}${name}: `;
     acc.push(`${unchanged}${value}`);
   }
 
-  if (status === 'changed') {
-    const changed = `${indent}${name}: {`;
-    const children = stylish(node.children);
-    acc.push(changed, children);
+  if (type === 'nested') {
+    const nested = `${indent}${name}: {`;
+    const children = stylish(node.children, depth + 1);
+    acc.push(nested, children);
   }
 
-  if (status === 'updated') {
+  if (type === 'updated') {
     const deleted = `${indent.slice(0, -2)}- ${name}: `;
     const added = `${indent.slice(0, -2)}+ ${name}: `;
 

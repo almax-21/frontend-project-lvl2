@@ -1,44 +1,33 @@
 import _ from 'lodash';
 
 const buildTree = (data1, data2) => {
-  const iter = (obj1, obj2, depth) => {
-    const keys = _.union(_.keys(obj1), _.keys(obj2));
-    const sortedKeys = keys.sort();
+  const keys = _.union(_.keys(data1), _.keys(data2));
+  const sortedKeys = _.sortBy(keys);
 
-    return sortedKeys.flatMap((key) => {
-      const basicProperties = { name: key, depth };
+  return sortedKeys.flatMap((key) => {
+    if (!_.has(data1, key)) {
+      return { name: key, type: 'added', value: data2[key] };
+    }
 
-      if (!_.has(obj1, key)) {
-        return { ...basicProperties, status: 'added', value: obj2[key] };
-      }
+    if (!_.has(data2, key)) {
+      return { name: key, type: 'deleted', value: data1[key] };
+    }
 
-      if (!_.has(obj2, key)) {
-        return { ...basicProperties, status: 'deleted', value: obj1[key] };
-      }
+    if (_.isObject(data1[key]) && _.isObject(data2[key])) {
+      return { name: key, type: 'nested', children: buildTree(data1[key], data2[key]) };
+    }
 
-      if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
-        return {
-          ...basicProperties,
-          status: 'changed',
-          value: 'nested',
-          children: iter(obj1[key], obj2[key], depth + 1),
-        };
-      }
+    if (data1[key] !== data2[key]) {
+      return {
+        name: key,
+        type: 'updated',
+        value: data2[key],
+        replacedValue: data1[key],
+      };
+    }
 
-      if (obj1[key] !== obj2[key]) {
-        return {
-          ...basicProperties,
-          status: 'updated',
-          value: obj2[key],
-          replacedValue: obj1[key],
-        };
-      }
-
-      return { ...basicProperties, status: 'unchanged', value: obj2[key] };
-    });
-  };
-
-  return iter(data1, data2, 1);
+    return { name: key, type: 'unchanged', value: data2[key] };
+  });
 };
 
 export default buildTree;

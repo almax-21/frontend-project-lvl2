@@ -1,65 +1,52 @@
 [
  {
   "name": "common",
-  "depth": 1,
-  "status": "changed",
-  "value": "nested",
+  "type": "nested",
   "children": [
    {
     "name": "follow",
-    "depth": 2,
-    "status": "added",
+    "type": "added",
     "value": false
    },
    {
     "name": "setting1",
-    "depth": 2,
-    "status": "unchanged",
+    "type": "unchanged",
     "value": "Value 1"
    },
    {
     "name": "setting2",
-    "depth": 2,
-    "status": "deleted",
+    "type": "deleted",
     "value": 200
    },
    {
     "name": "setting3",
-    "depth": 2,
-    "status": "updated",
+    "type": "updated",
     "value": null,
     "replacedValue": true
    },
    {
     "name": "setting4",
-    "depth": 2,
-    "status": "added",
+    "type": "added",
     "value": "blah blah"
    },
    {
     "name": "setting5",
-    "depth": 2,
-    "status": "added",
+    "type": "added",
     "value": {
      "key5": "value5"
     }
    },
    {
     "name": "setting6",
-    "depth": 2,
-    "status": "changed",
-    "value": "nested",
+    "type": "nested",
     "children": [
      {
       "name": "doge",
-      "depth": 3,
-      "status": "changed",
-      "value": "nested",
+      "type": "nested",
       "children": [
        {
         "name": "wow",
-        "depth": 4,
-        "status": "updated",
+        "type": "updated",
         "value": "so much",
         "replacedValue": ""
        }
@@ -67,14 +54,12 @@
      },
      {
       "name": "key",
-      "depth": 3,
-      "status": "unchanged",
+      "type": "unchanged",
       "value": "value"
      },
      {
       "name": "ops",
-      "depth": 3,
-      "status": "added",
+      "type": "added",
       "value": "vops"
      }
     ]
@@ -83,27 +68,22 @@
  },
  {
   "name": "group1",
-  "depth": 1,
-  "status": "changed",
-  "value": "nested",
+  "type": "nested",
   "children": [
    {
     "name": "baz",
-    "depth": 2,
-    "status": "updated",
+    "type": "updated",
     "value": "bars",
     "replacedValue": "bas"
    },
    {
     "name": "foo",
-    "depth": 2,
-    "status": "unchanged",
+    "type": "unchanged",
     "value": "bar"
    },
    {
     "name": "nest",
-    "depth": 2,
-    "status": "updated",
+    "type": "updated",
     "value": "str",
     "replacedValue": {
      "key": "value"
@@ -113,8 +93,7 @@
  },
  {
   "name": "group2",
-  "depth": 1,
-  "status": "deleted",
+  "type": "deleted",
   "value": {
    "abc": 12345,
    "deep": {
@@ -124,8 +103,7 @@
  },
  {
   "name": "group3",
-  "depth": 1,
-  "status": "added",
+  "type": "added",
   "value": {
    "fee": 100500,
    "deep": {
