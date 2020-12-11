@@ -24,7 +24,7 @@ const formatValue = (obj, depth) => {
   return result;
 };
 
-const stylish = (tree, depth = 1) => tree.reduce((acc, node, index) => {
+const formatInStylish = (tree, depth = 1) => tree.reduce((acc, node, index) => {
   const { name, type } = node;
   const value = _.isObject(node.value) ? '{' : node.value;
   const indent = makeIndent(depth * 2);
@@ -50,7 +50,7 @@ const stylish = (tree, depth = 1) => tree.reduce((acc, node, index) => {
 
   if (type === 'nested') {
     const nested = `${indent}${name}: {`;
-    const children = stylish(node.children, depth + 1);
+    const children = formatInStylish(node.children, depth + 1);
     acc.push(nested, children);
   }
 
@@ -80,4 +80,4 @@ const stylish = (tree, depth = 1) => tree.reduce((acc, node, index) => {
   return acc;
 }, []).join('\n');
 
-export default stylish;
+export default formatInStylish;

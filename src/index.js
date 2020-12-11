@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import parse from './parse.js';
 import buildTree from './buildTree.js';
-import getFormatter from './formatters/index.js';
+import format from './formatters/index.js';
 
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const content1 = fs.readFileSync(filepath1, 'utf-8');
@@ -13,10 +13,10 @@ const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const format2 = path.extname(filepath2);
   const data2 = parse(content2, format2);
 
-  const tree = buildTree(data1, data2);
-  const format = getFormatter(formatName);
+  const diffTree = buildTree(data1, data2);
+  const formattedDiff = format(formatName, diffTree);
 
-  return format(tree);
+  return formattedDiff;
 };
 
 export default genDiff;

@@ -1,18 +1,18 @@
-import stylish from './stylish.js';
-import plain from './plain.js';
-import json from './json.js';
+import formatInStylish from './stylish.js';
+import formatInPlain from './plain.js';
+import formatInJson from './json.js';
 
-const getFormatter = (formatName) => {
+const format = (formatName, tree) => {
   switch (formatName) {
     case 'stylish':
-      return stylish;
+      return formatInStylish(tree);
     case 'plain':
-      return plain;
+      return formatInPlain(tree);
     case 'json':
-      return json;
+      return formatInJson(tree);
     default:
       throw new Error(`Unexpected '${formatName}' formatter name`);
   }
 };
 
-export default getFormatter;
+export default format;

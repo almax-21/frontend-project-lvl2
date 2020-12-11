@@ -12,7 +12,7 @@ const formatValue = (value) => {
   return value;
 };
 
-const plain = (tree) => {
+const formatInPlain = (tree) => {
   const iter = (nodes, path) => {
     const filteredNodes = nodes.filter((node) => node.type !== 'unchanged');
 
@@ -38,4 +38,4 @@ const plain = (tree) => {
   return iter(tree, '');
 };
 
-export default plain;
+export default formatInPlain;
