@@ -1,83 +1,77 @@
 import _ from 'lodash';
 
-const makeIndent = (depth) => ('  ').repeat(depth);
+const makeIndent = (size, replacer = '  ') => replacer.repeat(size);
 
-const formatValue = (obj, depth) => {
-  const entries = Object.entries(obj);
-  const parts = entries.flatMap((entrie) => {
-    const [name, value] = entrie;
-    const unchanged = `${makeIndent(depth * 2)}    ${name}: `;
-    const value1 = _.isObject(value) ? '{' : value;
-    const unchangedValue = `${unchanged}${value1}`;
+const spacesCount = 2;
 
-    if (_.isObject(value)) {
-      const innerValue = formatValue(value, depth + 1);
-      return [unchangedValue, innerValue];
+const formatInnerValue = (value, depth) => {
+  const iter = (currentValue, currentDepth) => {
+    if (!_.isObject(currentValue)) {
+      return currentValue.toString();
     }
 
-    return unchangedValue;
-  });
+    const indentSize = currentDepth * spacesCount;
+    const currentIndent = makeIndent(indentSize + spacesCount);
+    const bracketIndent = makeIndent(indentSize);
+    const lines = Object
+      .entries(currentValue)
+      .map(([key, val]) => `${currentIndent}${key}: ${iter(val, currentDepth + 1)}`);
 
-  parts.push(`${makeIndent(depth * 2)}}`);
-  const result = parts.join('\n');
+    return [
+      '{',
+      ...lines,
+      `${bracketIndent}}`,
+    ].join('\n');
+  };
 
-  return result;
+  return iter(value, depth);
 };
 
-const formatInStylish = (tree, depth = 1) => tree.reduce((acc, node, index) => {
-  const { name, type } = node;
-  const value = _.isObject(node.value) ? '{' : node.value;
-  const indent = makeIndent(depth * 2);
+const formatInStylish = (tree) => {
+  const iter = (nodes, depth) => {
+    const indentSize = depth * spacesCount;
+    const indent = makeIndent(indentSize);
+    const signIndent = indent.slice(0, -2);
+    const bracketIndent = makeIndent(indentSize - spacesCount);
 
-  if (depth === 1 && index === 0) {
-    acc.push('{');
-  }
+    const lines = nodes.map((node) => {
+      const { name, type } = node;
+      const value = _.isObject(node.value) ? formatInnerValue(node.value, depth) : node.value;
 
-  if (type === 'added') {
-    const added = `${indent.slice(0, -2)}+ ${name}: `;
-    acc.push(`${added}${value}`);
-  }
+      if (type === 'added') {
+        return `${signIndent}+ ${name}: ${value}`;
+      }
 
-  if (type === 'deleted') {
-    const deleted = `${indent.slice(0, -2)}- ${name}: `;
-    acc.push(`${deleted}${value}`);
-  }
+      if (type === 'deleted') {
+        return `${signIndent}- ${name}: ${value}`;
+      }
 
-  if (type === 'unchanged') {
-    const unchanged = `${indent}${name}: `;
-    acc.push(`${unchanged}${value}`);
-  }
+      if (type === 'updated') {
+        const replacedValue = _.isObject(node.replacedValue)
+          ? formatInnerValue(node.replacedValue, depth)
+          : node.replacedValue;
 
-  if (type === 'nested') {
-    const nested = `${indent}${name}: {`;
-    const children = formatInStylish(node.children, depth + 1);
-    acc.push(nested, children);
-  }
+        return [
+          `${signIndent}- ${name}: ${replacedValue}`,
+          `${signIndent}+ ${name}: ${value}`,
+        ].join('\n');
+      }
 
-  if (type === 'updated') {
-    const deleted = `${indent.slice(0, -2)}- ${name}: `;
-    const added = `${indent.slice(0, -2)}+ ${name}: `;
+      if (type === 'nested') {
+        return `${indent}${name}: ${iter(node.children, depth + 1)}`;
+      }
 
-    if (_.isObject(node.replacedValue)) {
-      const innerValue = formatValue(node.replacedValue, depth);
-      acc.push(`${deleted}{`);
-      acc.push(innerValue);
-    } else {
-      acc.push(`${deleted}${node.replacedValue}`);
-    }
-    acc.push(`${added}${value}`);
-  }
+      return `${indent}${name}: ${value}`;
+    });
 
-  if (_.isObject(node.value)) {
-    const innerValue = formatValue(node.value, depth);
-    acc.push(innerValue);
-  }
+    return [
+      '{',
+      ...lines,
+      `${bracketIndent}}`,
+    ].join('\n');
+  };
 
-  if (index === tree.length - 1) {
-    acc.push(`${indent.slice(0, -4)}}`);
-  }
-
-  return acc;
-}, []).join('\n');
+  return iter(tree, 1);
+};
 
 export default formatInStylish;
