@@ -1,15 +1,15 @@
 import yaml from 'js-yaml';
 
 const parse = (content, format) => {
-  if (format === '.json') {
+  if (format === 'json') {
     return JSON.parse(content);
   }
 
-  if (format === '.yaml' || format === '.yml') {
+  if (format === 'yaml' || format === 'yml') {
     return yaml.safeLoad(content);
   }
 
-  throw new Error(`Unexpected ${format} file format`);
+  throw new Error(`Unexpected ${format} format`);
 };
 
 export default parse;
