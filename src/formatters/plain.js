@@ -13,29 +13,27 @@ const formatValue = (value) => {
 };
 
 const formatInPlain = (tree) => {
-  const iter = (nodes, path) => {
-    const filteredNodes = nodes.filter((node) => node.type !== 'unchanged');
+  const iter = (nodes, ancestors) => nodes.flatMap((node) => {
+    const { name, value, type } = node;
+    const ancestryLine = [...ancestors, name].join('.');
 
-    return filteredNodes.map((node) => {
-      const { name, value, type } = node;
-      const pathName = `${path}${name}`;
+    switch (type) {
+      case 'added':
+        return `Property '${ancestryLine}' was added with value: ${formatValue(value)}`;
+      case 'deleted':
+        return `Property '${ancestryLine}' was removed`;
+      case 'updated':
+        return `Property '${ancestryLine}' was updated. From ${formatValue(node.replacedValue)} to ${formatValue(value)}`;
+      case 'nested':
+        return iter(node.children, [...ancestors, name]);
+      case 'unchanged':
+        return [];
+      default:
+        throw new Error(`Unexpected ${type} node type`);
+    }
+  }).join('\n');
 
-      switch (type) {
-        case 'added':
-          return `Property '${pathName}' was added with value: ${formatValue(value)}`;
-        case 'deleted':
-          return `Property '${pathName}' was removed`;
-        case 'updated':
-          return `Property '${pathName}' was updated. From ${formatValue(node.replacedValue)} to ${formatValue(value)}`;
-        case 'nested':
-          return iter(node.children, `${pathName}.`);
-        default:
-          throw new Error(`Unexpected ${type} node type`);
-      }
-    }).join('\n');
-  };
-
-  return iter(tree, '');
+  return iter(tree, []);
 };
 
 export default formatInPlain;
