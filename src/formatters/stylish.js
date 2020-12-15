@@ -4,10 +4,10 @@ const makeIndent = (size, replacer = '  ') => replacer.repeat(size);
 
 const spacesCount = 2;
 
-const formatInnerValue = (value, depth) => {
+const formatValue = (value, depth) => {
   const iter = (currentValue, currentDepth) => {
     if (!_.isObject(currentValue)) {
-      return currentValue.toString();
+      return currentValue;
     }
 
     const indentSize = currentDepth * spacesCount;
@@ -36,32 +36,25 @@ const formatInStylish = (tree) => {
 
     const lines = nodes.map((node) => {
       const { name, type } = node;
-      const value = _.isObject(node.value) ? formatInnerValue(node.value, depth) : node.value;
+      const value = formatValue(node.value, depth);
 
-      if (type === 'added') {
-        return `${signIndent}+ ${name}: ${value}`;
+      switch (type) {
+        case 'added':
+          return `${signIndent}+ ${name}: ${value}`;
+        case 'deleted':
+          return `${signIndent}- ${name}: ${value}`;
+        case 'updated':
+          return [
+            `${signIndent}- ${name}: ${formatValue(node.replacedValue, depth)}`,
+            `${signIndent}+ ${name}: ${value}`,
+          ].join('\n');
+        case 'nested':
+          return `${indent}${name}: ${iter(node.children, depth + 1)}`;
+        case 'unchanged':
+          return `${indent}${name}: ${value}`;
+        default:
+          throw new Error(`Unexpected ${type} node type`);
       }
-
-      if (type === 'deleted') {
-        return `${signIndent}- ${name}: ${value}`;
-      }
-
-      if (type === 'updated') {
-        const replacedValue = _.isObject(node.replacedValue)
-          ? formatInnerValue(node.replacedValue, depth)
-          : node.replacedValue;
-
-        return [
-          `${signIndent}- ${name}: ${replacedValue}`,
-          `${signIndent}+ ${name}: ${value}`,
-        ].join('\n');
-      }
-
-      if (type === 'nested') {
-        return `${indent}${name}: ${iter(node.children, depth + 1)}`;
-      }
-
-      return `${indent}${name}: ${value}`;
     });
 
     return [
