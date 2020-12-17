@@ -6,7 +6,11 @@ const spacesCount = 2;
 
 const formatValue = (value, depth) => {
   const iter = (currentValue, currentDepth) => {
-    if (!_.isObject(currentValue)) {
+    if (_.isArray(currentValue)) {
+      return `[${currentValue}]`;
+    }
+
+    if (!_.isPlainObject(currentValue)) {
       return currentValue;
     }
 

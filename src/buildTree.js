@@ -13,11 +13,11 @@ const buildTree = (data1, data2) => {
       return { name: key, type: 'deleted', value: data1[key] };
     }
 
-    if (_.isObject(data1[key]) && _.isObject(data2[key])) {
+    if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
       return { name: key, type: 'nested', children: buildTree(data1[key], data2[key]) };
     }
 
-    if (data1[key] !== data2[key]) {
+    if (!_.isEqual(data1[key], data2[key])) {
       return {
         name: key,
         type: 'updated',
