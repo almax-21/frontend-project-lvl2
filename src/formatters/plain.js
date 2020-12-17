@@ -13,8 +13,13 @@ const formatValue = (value) => {
 };
 
 const formatInPlain = (tree) => {
-  const iter = (nodes, ancestors) => nodes.flatMap((node) => {
-    const { name, value, type } = node;
+  const iter = (nodes, ancestors) => nodes.flatMap(({
+    name,
+    value,
+    type,
+    children,
+    replacedValue,
+  }) => {
     const ancestryLine = [...ancestors, name].join('.');
 
     switch (type) {
@@ -23,9 +28,9 @@ const formatInPlain = (tree) => {
       case 'deleted':
         return `Property '${ancestryLine}' was removed`;
       case 'updated':
-        return `Property '${ancestryLine}' was updated. From ${formatValue(node.replacedValue)} to ${formatValue(value)}`;
+        return `Property '${ancestryLine}' was updated. From ${formatValue(replacedValue)} to ${formatValue(value)}`;
       case 'nested':
-        return iter(node.children, [...ancestors, name]);
+        return iter(children, [...ancestors, name]);
       case 'unchanged':
         return [];
       default:
