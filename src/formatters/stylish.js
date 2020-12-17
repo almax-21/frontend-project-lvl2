@@ -38,24 +38,29 @@ const formatInStylish = (tree) => {
     const signIndent = indent.slice(0, -2);
     const bracketIndent = makeIndent(indentSize - spacesCount);
 
-    const lines = nodes.map((node) => {
-      const { name, type } = node;
-      const value = formatValue(node.value, depth);
+    const lines = nodes.map(({
+      name,
+      type,
+      value,
+      children,
+      replacedValue,
+    }) => {
+      const formattedValue = formatValue(value, depth);
 
       switch (type) {
         case 'added':
-          return `${signIndent}+ ${name}: ${value}`;
+          return `${signIndent}+ ${name}: ${formattedValue}`;
         case 'deleted':
-          return `${signIndent}- ${name}: ${value}`;
+          return `${signIndent}- ${name}: ${formattedValue}`;
         case 'updated':
           return [
-            `${signIndent}- ${name}: ${formatValue(node.replacedValue, depth)}`,
-            `${signIndent}+ ${name}: ${value}`,
+            `${signIndent}- ${name}: ${formatValue(replacedValue, depth)}`,
+            `${signIndent}+ ${name}: ${formattedValue}`,
           ].join('\n');
         case 'nested':
-          return `${indent}${name}: ${iter(node.children, depth + 1)}`;
+          return `${indent}${name}: ${iter(children, depth + 1)}`;
         case 'unchanged':
-          return `${indent}${name}: ${value}`;
+          return `${indent}${name}: ${formattedValue}`;
         default:
           throw new Error(`Unexpected ${type} node type`);
       }
