@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const makeIndent = (size, replacer = '  ') => replacer.repeat(size);
+const makeIndent = (size) => ('  ').repeat(size);
 
 const spacesCount = 2;
 
