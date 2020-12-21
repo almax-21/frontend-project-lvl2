@@ -7,8 +7,7 @@ Utility capabilities:
 - support for different input formats: *yaml*, *json*;
 - generating a report in *plain* text, *stylish* and *json*.
  
-[![Actions Status](https://github.com/almax-21/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/almax-21/frontend-project-lvl2/actions)
-![Node CI](https://github.com/almax-21/frontend-project-lvl2/workflows/Node%20CI/badge.svg)
+![Node CI](https://github.com/almax-21/gendiff-cli/workflows/Node%20CI/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/dec3679a488b13a5f93c/maintainability)](https://codeclimate.com/github/almax-21/frontend-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/dec3679a488b13a5f93c/test_coverage)](https://codeclimate.com/github/almax-21/frontend-project-lvl2/test_coverage)
 
@@ -18,6 +17,9 @@ Node.js v13.2.0 and more
 ### Installation
 ```sh
 $ make install
+$ sudo* npm link
+
+* - optional
 ```
 
 ### Usage
