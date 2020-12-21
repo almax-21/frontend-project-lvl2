@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-const makeIndent = (size) => ('  ').repeat(size);
+const makeIndent = (size) => (' ').repeat(size);
 
-const spacesCount = 2;
+const spacesCount = 4;
 
 const formatValue = (value, depth) => {
   const iter = (currentValue, currentDepth) => {
