@@ -79,7 +79,12 @@
    {
     "name": "foo",
     "type": "unchanged",
-    "value": "bar"
+    "value": [
+     1,
+     true,
+     "3",
+     false
+    ]
    },
    {
     "name": "nest",

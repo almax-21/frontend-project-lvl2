@@ -12,7 +12,7 @@ common:
     doge:
       wow: so much
 group1:
-  foo: bar
+  foo: [1, true, "3", false]
   baz: bars
   nest: str
 group3:
