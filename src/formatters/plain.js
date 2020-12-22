@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const formatValue = (value) => {
-  if (typeof value === 'string') {
+  if (_.isString(value)) {
     return `'${value}'`;
   }
 
@@ -32,13 +32,15 @@ const formatInPlain = (tree) => {
       case 'nested':
         return iter(children, [...ancestors, name]);
       case 'unchanged':
-        return [];
+        return null;
       default:
         throw new Error(`Unexpected ${type} node type`);
     }
-  }).join('\n');
+  });
 
-  return iter(tree, []);
+  const formattedColl = _.compact(iter(tree, []));
+
+  return formattedColl.join('\n');
 };
 
 export default formatInPlain;
